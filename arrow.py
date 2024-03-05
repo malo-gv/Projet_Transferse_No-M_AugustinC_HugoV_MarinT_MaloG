@@ -1,6 +1,6 @@
 import pygame
 
-arrow_speed = 10F  # Vitesse de déplacement de la flèche
+arrow_speed = 10  # Vitesse de déplacement de la flèche
 distance_travelled = 0  # Distance parcourue par la flèche depuis le début
 arrow_x = 172
 arrow_y = 467
