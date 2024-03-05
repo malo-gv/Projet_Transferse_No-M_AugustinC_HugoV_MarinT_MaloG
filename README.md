@@ -1,1 +1,6 @@
-# Projet_Transferse_No-M_AugustinC_HugoV_MarinT_MaloG
+# Projet_Transverse
+## Noé M
+## Augustin C
+## Hugo V
+## Marin T
+## Malo G
