@@ -1,17 +1,8 @@
 import pygame
-from random import randint
 
-arrow_image = pygame.image.load("sprites character/arrow.png")
+def show_arrow(window):
+    arrow_image = pygame.image.load("sprites character/arrow.png")
+    arrow_image = pygame.transform.scale(arrow_image,(int(arrow_image.get_width() * 0.1), int(arrow_image.get_height() * 0.1)))
+    arrow_image = pygame.transform.rotate(arrow_image, -45)
 
-image = "sprites character/arrow.png"
-
-center = (70, 400)
-
-class Arrow :
-   def __init__(self,x,y,image):
-       self.x = x
-       self.y = y
-       self.image = image
-
-    def shooting_arrow_straight_speed5(self):
-        speed = 5
+    window.blit(arrow_image, (172,467))
