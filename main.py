@@ -25,6 +25,7 @@ window.blit(target, (850,440))
 arrow_x = 172
 arrow_y = 467
 arrow_angle = -45
+arrow_direction = 0
 arrow_visible = False
 arrow_rotate_down = False
 arrow_rotate_up = False
@@ -37,7 +38,6 @@ while running :
     for event in pygame.event.get():
         if event.type == QUIT:
             running = False
-        show_arrow(window, arrow_x, arrow_y, arrow_angle)
         if event.type == KEYDOWN:
             if event.key == K_DELETE:
                 show_arrow(window, arrow_x, arrow_y, arrow_angle)
@@ -45,32 +45,32 @@ while running :
 
             if event.key == K_UP:
                 arrow_rotate_up = True
+                arrow_rotate_down = False
 
             if event.key == K_DOWN:
                 arrow_rotate_down = True
+                arrow_rotate_up = False
 
             if event.key == K_SPACE:
                 arrow_moving = True
 
     if arrow_rotate_down :
-        show_arrow(window, arrow_x, arrow_y, arrow_angle - 25)
-
-
-    if arrow_rotate_up :
-
-        show_arrow(window, arrow_x, arrow_y, arrow_angle + 25)
+        arrow_direction = -25
+    if arrow_rotate_up:
+        arrow_direction = 25
 
     if arrow_moving:
         current_time = pygame.time.get_ticks()
         dt = (current_time - prev_time) / 1000.0
         arrow_x = move_arrow_straight()
-        window.blit(background, (0, 20))
-        window.blit(character, (75, base_ground))
-        window.blit(target, (850, 440))
-        show_arrow(window, arrow_x, arrow_y, arrow_angle)
         prev_time = current_time
 
+    window.blit(background, (0, 20))
+    window.blit(character, (75, base_ground))
+    window.blit(target, (850, 440))
+    show_arrow(window, arrow_x, arrow_y, arrow_angle + arrow_direction)
     pygame.display.update()
+
     clock.tick(60)
 
 pygame.quit()

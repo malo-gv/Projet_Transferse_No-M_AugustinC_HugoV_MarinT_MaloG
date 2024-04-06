@@ -20,7 +20,18 @@ def move_arrow_straight():
 def rotate_arrow(dir):
     global arrow_angle
     if (dir == "up"):
-        arrow_angle = arrow_angle + 25
+        arrow_angle = arrow_angle + 15
     if (dir == "down"):
-        arrow_angle = arrow_angle - 25
+        arrow_angle = arrow_angle - 15
     return arrow_angle
+
+#def collision_cible:
+# to do
+
+#def afficher_trajectoire:
+# to do (à la Angry Bird)
+
+#def bouger_fleche_cloche:
+# to do
+# Utiliser formule physique pour prévoir la prochaine position de la flèche
+
