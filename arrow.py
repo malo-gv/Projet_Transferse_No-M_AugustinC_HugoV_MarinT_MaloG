@@ -1,10 +1,6 @@
 import pygame
-
-arrow_speed = 10  # Vitesse de déplacement de la flèche
-distance_travelled = 0  # Distance parcourue par la flèche depuis le début
-arrow_x = 172
-arrow_y = 467
-arrow_angle = -45
+from constants import *
+import math
 
 def show_arrow(window, arrow_x, arrow_y, arrow_angle):
     arrow_image = pygame.image.load("sprites character/arrow.png")
@@ -19,11 +15,17 @@ def move_arrow_straight():
 
 def rotate_arrow(dir):
     global arrow_angle
-    if (dir == "up"):
-        arrow_angle = arrow_angle + 15
-    if (dir == "down"):
-        arrow_angle = arrow_angle - 15
+    if dir == "up":
+        arrow_angle += 15
+    if dir == "down":
+        arrow_angle -= 15
     return arrow_angle
+
+def calculate_arrow_angle(mouse_x, mouse_y):
+    dx = mouse_x - arrow_x
+    dy = mouse_y - arrow_y
+    angle = math.degrees(math.atan2(dy, dx))
+    return -angle
 
 #def collision_cible:
 # to do
