@@ -2,16 +2,22 @@ import pygame
 from constants import *
 import math
 
-def show_arrow(window, arrow_x, arrow_y, arrow_angle):
-    arrow_image = pygame.image.load("sprites character/arrow.png")
-    arrow_image = pygame.transform.scale(arrow_image, (int(arrow_image.get_width() * 0.1), int(arrow_image.get_height() * 0.1)))
-    arrow_image = pygame.transform.rotate(arrow_image, arrow_angle)
-    window.blit(arrow_image, (arrow_x, arrow_y))
+def show_arrow(window, arrow_x, arrowY, arrow_angle):
+    arrowImage = pygame.image.load("sprites character/arrow.png")
+    arrowImage = pygame.transform.scale(arrowImage, (int(arrowImage.get_width() * 0.1), int(arrowImage.get_height() * 0.1)))
+    arrowImage = pygame.transform.rotate(arrowImage, arrow_angle)
+    window.blit(arrowImage, (arrow_x, arrowY))
 
-def move_arrow_straight():
-    global arrow_x
-    arrow_x = arrow_x + arrow_speed
-    return arrow_x
+def moveArrowStraight():
+    global arrowX
+    arrowX = arrowX + arrowSpeed
+    return arrowX
+
+def move_arrow_parabolic():
+    global arrowX, arrow_y, arrowSpeed, gravity
+    arrowX += arrowSpeed
+    arrow_y += arrowSpeed * math.sin(arrow_angle) - gravity * 0.5
+    return arrowX, arrow_y
 
 def rotate_arrow(dir):
     global arrow_angle
@@ -21,9 +27,9 @@ def rotate_arrow(dir):
         arrow_angle -= 15
     return arrow_angle
 
-def calculate_arrow_angle(mouse_x, mouse_y):
-    dx = mouse_x - arrow_x
-    dy = mouse_y - arrow_y
+def calculate_arrow_angle(mouseX, mouseY):
+    dx = mouseX - arrowX
+    dy = mouseY - arrowY
     angle = math.degrees(math.atan2(dy, dx))
     return -angle
 

@@ -17,56 +17,39 @@ window.blit(background, (0,20))
 character = pygame.image.load("sprites character/archer.png")
 character = pygame.transform.scale(character, (int(character.get_width() * 0.25), int(character.get_height() * 0.25)))
 character = pygame.transform.flip(character, True, False)
-window.blit(character, (75, base_ground))
+window.blit(character, (75, baseGround))
 
 target = pygame.image.load("sprites character/target3.png")
 target = pygame.transform.scale(target, (int(target.get_width() * 0.23), int(target.get_height() * 0.23)))
 window.blit(target, (850,440))
 
-prev_time = pygame.time.get_ticks()
+prevTime = pygame.time.get_ticks()
 keys = pygame.key.get_pressed()
 
 running = True
-arrow_moving = False
+arrowMoving = False
 
 while running:
     for event in pygame.event.get():
         if event.type == QUIT:
             running = False
         if event.type == MOUSEMOTION:
-            mouse_x, mouse_y = pygame.mouse.get_pos()  # Pour obtenir les coord de la souris
-            arrow_angle = calculate_arrow_angle(mouse_x,mouse_y) - 45
+            mouseX, mouseY = pygame.mouse.get_pos()  # Pour obtenir les coord de la souris
+            arrowAngle = calculate_arrow_angle(mouseX, mouseY) - 45
         if event.type == KEYDOWN:
-            if event.key == K_DELETE:
-                show_arrow(window, arrow_x, arrow_y, arrow_angle)
-                arrow_visible = True
-
-            if event.key == K_UP:
-                arrow_rotate_up = True
-                arrow_rotate_down = False
-
-            if event.key == K_DOWN:
-                arrow_rotate_down = True
-                arrow_rotate_up = False
-
             if event.key == K_SPACE:
-                arrow_moving = True
+                arrowMoving = True
 
-    if arrow_rotate_down :
-        arrow_direction = -25
-    if arrow_rotate_up:
-        arrow_direction = 25
-
-    if arrow_moving:
+    if arrowMoving:
         current_time = pygame.time.get_ticks()
-        dt = (current_time - prev_time) / 1000.0
-        arrow_x = move_arrow_straight()
-        prev_time = current_time
+        dt = (current_time - prevTime) / 1000.0
+        arrowX = moveArrowStraight()
+        prevTime = current_time
 
     window.blit(background, (0, 20))
-    window.blit(character, (75, base_ground))
+    window.blit(character, (75, baseGround))
     window.blit(target, (850, 440))
-    show_arrow(window, arrow_x, arrow_y, arrow_angle + arrow_direction)
+    show_arrow(window, arrowX, arrowY, arrowAngle + arrowDirection)
     pygame.display.update()
     clock.tick(60)
 
