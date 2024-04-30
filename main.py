@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 from arrow import *
 from constants import *
-from random import randint
+from target import *
 
 pygame.init()
 
@@ -19,9 +19,7 @@ character = pygame.transform.scale(character, (int(character.get_width() * 0.25)
 character = pygame.transform.flip(character, True, False)
 window.blit(character, (75, base_ground))
 
-target = pygame.image.load("sprites character/target3.png")
-target = pygame.transform.scale(target, (int(target.get_width() * 0.23), int(target.get_height() * 0.23)))
-window.blit(target, (850,440))
+target = afficher_cible_random()
 
 prev_time = pygame.time.get_ticks()
 keys = pygame.key.get_pressed()
