@@ -46,6 +46,12 @@ while running:
         arrow_x = move_arrow_straight()
         prev_time = current_time
 
+    if arrow_x > WIDTH:
+        arrow_x = 172
+        arrow_y = 467
+        arrow_angle = -45
+        arrow_direction = 0
+
     window.blit(background, (0, 20))
     window.blit(character, (75, base_ground))
     window.blit(target, (850, 440))
