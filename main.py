@@ -35,21 +35,22 @@ while running:
             running = False
         if event.type == MOUSEMOTION:
             mouseX, mouseY = pygame.mouse.get_pos()  # Pour obtenir les coord de la souris
-            arrowAngle = calculate_arrow_angle(mouseX, mouseY) - 45
+            arrowAngle = calculateArrowAngle(mouseX, mouseY) - 45
         if event.type == KEYDOWN:
             if event.key == K_SPACE:
                 arrowMoving = True
 
     if arrowMoving:
-        current_time = pygame.time.get_ticks()
-        dt = (current_time - prevTime) / 1000.0
-        arrowX = moveArrowStraight()
-        prevTime = current_time
+        currentTime = pygame.time.get_ticks()
+        dt = (currentTime - prevTime) / 1000.0
+        arrowXTravel = moveArrowStraight(arrowX, arrowSpeed)
+        arrowYTravel = moveArrowParabolic(arrowY, arrowSpeed, gravity)
+        prevTime = currentTime
 
     window.blit(background, (0, 20))
     window.blit(character, (75, baseGround))
     window.blit(target, (850, 440))
-    show_arrow(window, arrowX, arrowY, arrowAngle + arrowDirection)
+    showArrow(window, arrowXTravel, arrowYTravel, arrowAngle + arrowDirection)
     pygame.display.update()
     clock.tick(60)
 
