@@ -22,8 +22,12 @@ def calculateArrowAngle(mouseX, mouseY):
     angle = math.degrees(math.atan2(dy, dx))
     return -angle
 
-#def collision_cible:
-# to do
+def collision_cible(arrowX, arrowY, targetX, targetY):
+    if (arrowX + 60 > targetX and arrowX + 60 < targetX + 103) and (arrowY + 60 > targetY and arrowY + 60 < targetY + 103):
+        print("COLISION")
+        return True
+    else :
+        return False
 
 #def afficher_trajectoire:
 # to do (à la Angry Bird)

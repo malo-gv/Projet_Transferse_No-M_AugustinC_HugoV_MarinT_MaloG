@@ -14,6 +14,10 @@ WIDTH = 1080
 LENGTH = 725
 baseGround = 440
 
+#Constantes cible
+targetX = 850
+targetY = 450
+
 #Constantes natrelles
 gravity = 9.8
 
@@ -23,4 +27,4 @@ arrowDirection = 0
 arrowVisible = False
 arrowRotateDown = False
 arrowRotateUp = False
-
+colisionActive = False

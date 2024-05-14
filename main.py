@@ -19,9 +19,9 @@ character = pygame.transform.scale(character, (int(character.get_width() * 0.25)
 character = pygame.transform.flip(character, True, False)
 window.blit(character, (75, baseGround))
 
-target = pygame.image.load("sprites character/target3.png")
-target = pygame.transform.scale(target, (int(target.get_width() * 0.23), int(target.get_height() * 0.23)))
-window.blit(target, (850,440))
+target = pygame.image.load("sprites character/bullseye.png")
+target = pygame.transform.scale(target, (int(target.get_width() * 0.20), int(target.get_height() * 0.20)))
+window.blit(target, (targetX,targetY))
 
 prevTime = pygame.time.get_ticks()
 keys = pygame.key.get_pressed()
@@ -33,7 +33,7 @@ while running:
     for event in pygame.event.get():
         if event.type == QUIT:
             running = False
-        if event.type == MOUSEMOTION:
+        if event.type == MOUSEMOTION and arrowMoving == False:
             mouseX, mouseY = pygame.mouse.get_pos()  # Pour obtenir les coord de la souris
             arrowAngle = calculateArrowAngle(mouseX, mouseY) - 45
         if event.type == KEYDOWN:
@@ -43,14 +43,19 @@ while running:
     if arrowMoving:
         currentTime = pygame.time.get_ticks()
         dt = (currentTime - prevTime) / 1000.0
-        arrowXTravel = moveArrowStraight(arrowX, arrowSpeed)
-        arrowYTravel = moveArrowParabolic(arrowY, arrowSpeed, gravity)
+        arrowX = moveArrowStraight(arrowX, arrowSpeed)
+        """arrowYTravel = moveArrowParabolic(arrowY, arrowSpeed, gravity)"""
         prevTime = currentTime
+        colisionActive = collision_cible(arrowX,arrowY,targetX,targetY)
+
+
+    if colisionActive:
+        arrowMoving = False
 
     window.blit(background, (0, 20))
     window.blit(character, (75, baseGround))
-    window.blit(target, (850, 440))
-    showArrow(window, arrowXTravel, arrowYTravel, arrowAngle + arrowDirection)
+    window.blit(target, (targetX, targetY))
+    showArrow(window, arrowX, arrowY, arrowAngle + arrowDirection)
     pygame.display.update()
     clock.tick(60)
 
