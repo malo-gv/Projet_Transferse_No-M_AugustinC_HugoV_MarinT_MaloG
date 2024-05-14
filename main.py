@@ -33,7 +33,7 @@ while running:
     for event in pygame.event.get():
         if event.type == QUIT:
             running = False
-        if event.type == MOUSEMOTION and arrowMoving == False:
+        if event.type == MOUSEMOTION and arrowMoving == False and colisionActive == False:
             mouseX, mouseY = pygame.mouse.get_pos()  # Pour obtenir les coord de la souris
             arrowAngle = calculateArrowAngle(mouseX, mouseY) - 45
         if event.type == KEYDOWN:
