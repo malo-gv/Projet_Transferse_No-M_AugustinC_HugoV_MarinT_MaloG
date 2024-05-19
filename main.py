@@ -21,7 +21,6 @@ character = pygame.transform.flip(character, True, False)
 target = pygame.image.load("sprites character/bullseye.png")
 target = pygame.transform.scale(target, (int(target.get_width() * 0.20), int(target.get_height() * 0.20)))
 
-prevTime = pygame.time.get_ticks() / 1000
 keys = pygame.key.get_pressed()
 
 running = True
@@ -52,20 +51,21 @@ while running:
         currentTime = pygame.time.get_ticks() / 1000
         timerShoot = currentTime - startTime
         print(timerShoot)
-        arrowX, arrowY = moveArrow(initialArrowX, initialArrowY, shootForce, arrowAngle, timerShoot)
-        prevTime = currentTime
-        colisionActive = collisionCible(arrowX, arrowY, targetX, targetY)
+        arrowX, arrowY = moveArrow(arrowX, arrowY, shootForce, arrowAngle, timerShoot)
 
-
-    if colisionActive:
-        arrowMoving = False
+        if collisionCible(arrowX, arrowY, targetX, targetY):
+            arrowMoving = False
+            colisionActive = True
 
     window.blit(background, (0, 20))
     window.blit(character, (75, baseGround))
     window.blit(target, (targetX, targetY))
+
+    if not arrowMoving:
+        """print("caca")
+        drawTrajectory(window, initialArrowX, initialArrowY, shootForce, arrowAngle)"""
+
     showArrow(window, arrowX, arrowY, arrowAngle)
-    initialArrowX = arrowX
-    initialArrowY = arrowY
     pygame.display.update()
     clock.tick(60)
 

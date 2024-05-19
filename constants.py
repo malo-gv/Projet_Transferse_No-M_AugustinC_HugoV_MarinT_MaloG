@@ -1,8 +1,10 @@
 #Constantes flèches
 arrowX = 172
-arrowY = 467
+arrowY = 502
 arrowAngle = 0
 arrowTilt = 0
+initialArrowX = arrowX
+initialArrowY = arrowY
 
 #Constantes écran
 WIDTH = 1080

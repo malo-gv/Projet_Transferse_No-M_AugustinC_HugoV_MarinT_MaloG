@@ -9,10 +9,10 @@ def showArrow(window, arrowX, arrowY, arrowAngle):
     arrowRectange = arrowImage.get_rect(center = (arrowX, arrowY))
     window.blit(arrowImage, arrowRectange.topleft)
 
-def moveArrow(initialArrowX, initialArrowY, shootForce, arrowAngle, timerShoot):
+def moveArrow(arrowX, arrowY, shootForce, arrowAngle, timerShoot):
     time = timerShoot
-    arrowX = initialArrowX + (shootForce * math.cos(math.radians(arrowAngle)) * time)
-    arrowY = initialArrowY + 0.5 * gravity * (time ** 2) - ((shootForce * math.sin(math.radians(arrowAngle))) * time)
+    arrowX = arrowX + (shootForce * math.cos(math.radians(arrowAngle)) * time)
+    arrowY = arrowY + 0.5 * gravity * (time ** 2) - ((shootForce * math.sin(math.radians(arrowAngle))) * time)
     return arrowX, arrowY
 
 def calculateArrowAngle(mouseX, mouseY, arrowX, arrowY):
@@ -28,5 +28,9 @@ def collisionCible(arrowX, arrowY, targetX, targetY):
     else :
         return False
 
-#def afficher_trajectoire:
-# to do (à la Angry Bird)
+"""def drawTrajectory(window, arrowX, arrowY, shootForce, arrowAngle, steps=50):
+    for step in range(steps):
+        t = step / 10.0  # Échelonner le temps pour obtenir des points plus rapprochés
+        arrowX = arrowX + (shootForce * math.cos(math.radians(arrowAngle)) * t)
+        arrowY = arrowY + 0.5 * gravity * (t ** 2) - ((shootForce * math.sin(math.radians(arrowAngle))) * t)
+        pygame.draw.circle(window, (0, 0, 0), (int(arrowX), int(arrowY)), 2)"""
