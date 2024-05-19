@@ -27,6 +27,3 @@ def collisionCible(arrowX, arrowY, targetX, targetY):
         return True
     else:
         return False
-
-#def afficher_trajectoire:
-# to do (à la Angry Bird)
