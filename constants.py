@@ -1,6 +1,6 @@
 #Constantes flèches
 arrowX = 172
-arrowY = 467
+arrowY = 502
 arrowAngle = 0
 arrowTilt = 0
 

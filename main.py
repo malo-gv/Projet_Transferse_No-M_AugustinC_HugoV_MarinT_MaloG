@@ -55,15 +55,25 @@ while running:
         arrowX, arrowY = moveArrow(initialArrowX, initialArrowY, shootForce, arrowAngle, timerShoot)
         prevTime = currentTime
         colisionActive = collisionCible(arrowX, arrowY, targetX, targetY)
+        while timerShoot < 1:
+            for i in range(10):
+                arrowDisplayX, arrowDisplayY = moveArrow(initialArrowX, initialArrowY, shootForce, arrowAngle, timerShoot)
+            displayAngle = math.degrees(math.atan2(arrowDisplayY, arrowDisplayX))
 
-
+    if not arrowMoving:
+        displayAngle = arrowAngle
+        arrowDisplayX = arrowX
+        arrowDisplayY = arrowY
     if colisionActive:
         arrowMoving = False
 
     window.blit(background, (0, 20))
     window.blit(character, (75, baseGround))
     window.blit(target, (targetX, targetY))
-    showArrow(window, arrowX, arrowY, arrowAngle)
+
+
+    showArrow(window, arrowDisplayX, arrowDisplayY, displayAngle)
+
     initialArrowX = arrowX
     initialArrowY = arrowY
     pygame.display.update()

@@ -2,10 +2,10 @@ import pygame
 from constants import *
 import math
 
-def showArrow(window, arrowX, arrowY, arrowAngle):
+def showArrow(window, arrowX, arrowY, displayAngle):
     arrowImage = pygame.image.load("sprites character/arrow.png")
     arrowImage = pygame.transform.scale(arrowImage, (int(arrowImage.get_width() * 0.1), int(arrowImage.get_height() * 0.1)))
-    arrowImage = pygame.transform.rotate(arrowImage, arrowAngle)
+    arrowImage = pygame.transform.rotate(arrowImage, displayAngle)
     arrowRectange = arrowImage.get_rect(center = (arrowX, arrowY))
     window.blit(arrowImage, arrowRectange.topleft)
 
