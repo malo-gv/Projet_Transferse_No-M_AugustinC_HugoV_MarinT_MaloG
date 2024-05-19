@@ -1,29 +1,27 @@
-import pygame
 from pygame.locals import *
 from arrow import *
 from constants import *
-from random import randint
 
+currentTime = pygame.time.get_ticks() / 1000
+print(currentTime)
 pygame.init()
 
 clock = pygame.time.Clock()
 
 window = pygame.display.set_mode((WIDTH, LENGTH))
 
+# fond
 background = pygame.image.load("Images background/background v1.jpg").convert()
-window.blit(background, (0,20))
 
-
+# archer
 character = pygame.image.load("sprites character/archer.png")
 character = pygame.transform.scale(character, (int(character.get_width() * 0.25), int(character.get_height() * 0.25)))
 character = pygame.transform.flip(character, True, False)
-window.blit(character, (75, baseGround))
 
 target = pygame.image.load("sprites character/bullseye.png")
 target = pygame.transform.scale(target, (int(target.get_width() * 0.20), int(target.get_height() * 0.20)))
-window.blit(target, (targetX,targetY))
 
-prevTime = pygame.time.get_ticks()
+prevTime = pygame.time.get_ticks() / 1000
 keys = pygame.key.get_pressed()
 
 running = True
@@ -35,18 +33,28 @@ while running:
             running = False
         if event.type == MOUSEMOTION and arrowMoving == False and colisionActive == False:
             mouseX, mouseY = pygame.mouse.get_pos()  # Pour obtenir les coord de la souris
-            arrowAngle = calculateArrowAngle(mouseX, mouseY)
+            arrowAngle = calculateArrowAngle(mouseX, mouseY, arrowX, arrowY)
         if event.type == KEYDOWN:
             if event.key == K_SPACE:
+                shootStartTime = pygame.time.get_ticks()
+        if event.type == KEYUP:
+            if event.key == K_SPACE:
+                shootEndTime = pygame.time.get_ticks()
+                shootDuration = (shootEndTime - shootStartTime) / 1000.0
+                shootForce = min(maxForce, shootDuration * 10)
+                initialArrowX = arrowX
+                initialArrowY = arrowY
                 arrowMoving = True
+                startTime = pygame.time.get_ticks() / 1000
+
 
     if arrowMoving:
-        currentTime = pygame.time.get_ticks()
-        dt = (currentTime - prevTime) / 1000.0
-        arrowX = moveArrowStraight(arrowX, arrowSpeed)
-        """arrowYTravel = moveArrowParabolic(arrowY, arrowSpeed, gravity)"""
+        currentTime = pygame.time.get_ticks() / 1000
+        timerShoot = currentTime - startTime
+        print(timerShoot)
+        arrowX, arrowY = moveArrow(initialArrowX, initialArrowY, shootForce, arrowAngle, timerShoot)
         prevTime = currentTime
-        colisionActive = collision_cible(arrowX,arrowY,targetX,targetY)
+        colisionActive = collision_cible(arrowX, arrowY, targetX, targetY)
 
 
     if colisionActive:
@@ -55,7 +63,9 @@ while running:
     window.blit(background, (0, 20))
     window.blit(character, (75, baseGround))
     window.blit(target, (targetX, targetY))
-    showArrow(window, arrowX, arrowY, arrowAngle + arrowDirection)
+    showArrow(window, arrowX, arrowY, arrowAngle)
+    initialArrowX = arrowX
+    initialArrowY = arrowY
     pygame.display.update()
     clock.tick(60)
 

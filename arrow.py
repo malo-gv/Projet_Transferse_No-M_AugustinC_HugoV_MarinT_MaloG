@@ -6,17 +6,16 @@ def showArrow(window, arrowX, arrowY, arrowAngle):
     arrowImage = pygame.image.load("sprites character/arrow.png")
     arrowImage = pygame.transform.scale(arrowImage, (int(arrowImage.get_width() * 0.1), int(arrowImage.get_height() * 0.1)))
     arrowImage = pygame.transform.rotate(arrowImage, arrowAngle)
-    window.blit(arrowImage, (arrowX, arrowY))
+    arrowRectange = arrowImage.get_rect(center = (arrowX, arrowY))
+    window.blit(arrowImage, arrowRectange.topleft)
 
-def moveArrowStraight(arrowX, arrowSpeed):
-    arrowX = arrowX + arrowSpeed
-    return arrowX
+def moveArrow(initialArrowX, initialArrowY, shootForce, arrowAngle, timerShoot):
+    time = timerShoot
+    arrowX = initialArrowX + (shootForce * math.cos(math.radians(arrowAngle)) * time)
+    arrowY = initialArrowY + 0.5 * gravity * (time ** 2) - ((shootForce * math.sin(math.radians(arrowAngle))) * time)
+    return arrowX, arrowY
 
-def moveArrowParabolic(arrowY, arrowSpeed, gravity):
-    arrowY += arrowSpeed * math.sin(arrowAngle) - gravity * 0.5
-    return arrowY
-
-def calculateArrowAngle(mouseX, mouseY):
+def calculateArrowAngle(mouseX, mouseY, arrowX, arrowY):
     dx = mouseX - arrowX
     dy = mouseY - arrowY
     angle = math.degrees(math.atan2(dy, dx))
@@ -31,8 +30,3 @@ def collision_cible(arrowX, arrowY, targetX, targetY):
 
 #def afficher_trajectoire:
 # to do (à la Angry Bird)
-
-#def bouger_fleche_cloche:
-# to do
-# Utiliser formule physique pour prévoir la prochaine position de la flèche
-
