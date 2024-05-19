@@ -54,7 +54,7 @@ while running:
         print(timerShoot)
         arrowX, arrowY = moveArrow(initialArrowX, initialArrowY, shootForce, arrowAngle, timerShoot)
         prevTime = currentTime
-        colisionActive = collision_cible(arrowX, arrowY, targetX, targetY)
+        colisionActive = collisionCible(arrowX, arrowY, targetX, targetY)
 
 
     if colisionActive:

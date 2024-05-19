@@ -21,7 +21,7 @@ def calculateArrowAngle(mouseX, mouseY, arrowX, arrowY):
     angle = math.degrees(math.atan2(dy, dx))
     return -angle
 
-def collision_cible(arrowX, arrowY, targetX, targetY):
+def collisionCible(arrowX, arrowY, targetX, targetY):
     if (arrowX + 60 > targetX + 45 and arrowX + 60 < targetX + 103 ) and (arrowY + 60 > targetY + 45 and arrowY + 60 < targetY + 103):
         print("COLLISION")
         return True
