@@ -18,14 +18,14 @@ def moveArrow(initialArrowX, initialArrowY, shootForce, arrowAngle, timerShoot):
 def calculateArrowAngle(mouseX, mouseY, arrowX, arrowY):
     dx = mouseX - arrowX
     dy = mouseY - arrowY
-    angle = math.degrees(math.atan2(dy, dx))
-    return -angle
+    angle = -math.degrees(math.atan2(dy, dx))
+    return angle
 
 def collisionCible(arrowX, arrowY, targetX, targetY):
     if (arrowX + 60 > targetX + 45 and arrowX + 60 < targetX + 103 ) and (arrowY + 60 > targetY + 45 and arrowY + 60 < targetY + 103):
         print("COLLISION")
         return True
-    else :
+    else:
         return False
 
 #def afficher_trajectoire:
