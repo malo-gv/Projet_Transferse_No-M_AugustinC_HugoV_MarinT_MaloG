@@ -7,6 +7,7 @@ arrowAngle = 0
 arrowTilt = 0
 initialArrowX = arrowX
 initialArrowY = arrowY
+score = 0
 
 #Constantes écran
 WIDTH = 1080

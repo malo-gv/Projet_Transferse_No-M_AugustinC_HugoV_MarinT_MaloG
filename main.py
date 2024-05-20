@@ -62,13 +62,15 @@ while running:
 
         arrowTilt = calculateArrowAngle(arrowX, arrowY, previousArrowX, previousArrowY)
 
-        if collisionCible(arrowX,arrowY,arrowAngle, targetX,targetY, target):
+        if collisionCible(arrowX,arrowY,arrowAngle, targetX, targetY, target):
             pygame.time.wait(750)
             arrowMoving = False
             colisionActive = True
 
     if arrowMoving is False and colisionActive:
         pygame.time.wait(2000)
+        score = score + 1
+        print(score)
         print("NEXT")
         colisionActive = False
         arrowX = baseX
@@ -84,13 +86,22 @@ while running:
     window.blit(background, (0, 20))
     window.blit(character, (75, baseGround))
     window.blit(target, (targetX, targetY))
+    font = pygame.font.SysFont("comicsans", 30, True)
+    text = font.render("Cibles touchées : " + str(score), 1, (255, 255, 255))  # Arguments are: text, anti-aliasing, color
+    window.blit(text, (55, 40))
 
     if not arrowMoving and shootStartTime:
         currentShootDuration = (pygame.time.get_ticks() - shootStartTime) / 1000.0
         drawPowerGauge(window, currentShootDuration, maxForceDraw)
         drawTrajectory(window, initialArrowX, initialArrowY, min(maxForceDraw, currentShootDuration * 10), arrowAngle)
 
-    showArrow(window, arrowX, arrowY, arrowTilt)
+    if arrowMoving:
+        showArrow(window, arrowX, arrowY, arrowTilt)
+
+    if not arrowMoving:
+        showArrow(window, arrowX, arrowY, arrowAngle)
+
+
     pygame.display.update()
     clock.tick(60)
 
