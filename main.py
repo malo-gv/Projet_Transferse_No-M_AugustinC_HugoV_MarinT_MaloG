@@ -1,9 +1,8 @@
-import pygame.time
 from pygame.locals import *
 from arrow import *
 from constants import *
 from target import *
-import time
+
 currentTime = pygame.time.get_ticks() / 1000
 print(currentTime)
 pygame.init()
@@ -27,8 +26,9 @@ keys = pygame.key.get_pressed()
 
 running = True
 arrowMoving = False
-
+JAD = False
 while running:
+
     for event in pygame.event.get():
         if event.type == QUIT:
             running = False
@@ -39,6 +39,8 @@ while running:
             if event.key == K_SPACE:
                 shootStartTime = pygame.time.get_ticks()
         if event.type == KEYUP:
+            if event.key == K_j:
+                JAD = True
             if event.key == K_SPACE and arrowMoving is False:
                 shootEndTime = pygame.time.get_ticks()
                 shootDuration = (shootEndTime - shootStartTime) / 1000.0
@@ -70,8 +72,6 @@ while running:
     if arrowMoving is False and colisionActive:
         pygame.time.wait(2000)
         score = score + 1
-        print(score)
-        print("NEXT")
         colisionActive = False
         arrowX = baseX
         arrowY = baseY
@@ -85,7 +85,7 @@ while running:
         arrowMoving = False
         arMissed = arMissed + 1
 
-    if (arrowX > 1080 or arrowY > 720):
+    if (arrowX > WIDTH or arrowY > LENGTH):
         arrowX = baseX
         arrowY = baseY
         arrowMoving = False
@@ -99,12 +99,18 @@ while running:
     window.blit(character, (75, baseGround))
     window.blit(target, (targetX, targetY))
     font = pygame.font.SysFont("comicsans", 30, True)
-    textScore = font.render("Cibles touchées : " + str(score), 1, (255, 255, 255))
+    textScore = font.render("Dans le mille ! : " + str(score), 1, (255, 255, 255))
     textMiss = font.render("Tirs ratés : " + str(arMissed), 1, (255, 255, 255))
     textGameOver = font.render("5 tirs ratés = GAME OVER", 1, (200, 30, 30))
     window.blit(textScore, (55, 30))
     window.blit(textMiss, (55, 70))
-    window.blit(textGameOver, (680, 20))
+    window.blit(textGameOver, (660, 20))
+
+    if JAD == True :
+        imageJAD = pygame.image.load("sprites character/jad.png")
+        imageJAD = pygame.transform.scale(imageJAD,(int(character.get_width() * 0.4), int(character.get_height() * 0.4)))
+        imageJAD = pygame.transform.flip(imageJAD, True, False)
+        window.blit(imageJAD, (116, 448))
 
     if finished:
         gameOver = pygame.image.load("sprites character/game-over.png")
@@ -122,9 +128,9 @@ while running:
     if not arrowMoving:
         showArrow(window, arrowX, arrowY, arrowAngle)
 
-
     pygame.display.update()
     clock.tick(60)
+
     if finished:
         pygame.time.wait(2000)
         pygame.quit()

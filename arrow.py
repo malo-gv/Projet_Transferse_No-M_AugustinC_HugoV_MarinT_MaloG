@@ -24,7 +24,6 @@ def calculateArrowAngle(mouseX, mouseY, arrowX, arrowY):
 
 def collisionCible(arrowX, arrowY, targetX, targetY):
     if (arrowX > targetX + 10 and arrowX < targetX + 90) and (arrowY > targetY + 20 and arrowY < targetY + 80):
-        print("COLLISION")
         return True
     else:
         return False
@@ -36,7 +35,6 @@ def collisionCible2(arrowX, arrowY, arrowAngle, targetX, targetY, target):
     target = pygame.transform.scale(target , (int(target.get_width() * 0.6), int(target.get_height() * 0.6)))
     colisionZone = target.get_rect(topleft=(targetX + target.get_width()*0.2, targetY + target.get_height()*0.2))
     if arrowRectange.colliderect(colisionZone):
-        print("COLLISION")
         return True
     else:
         return False
