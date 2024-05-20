@@ -1,4 +1,3 @@
-import pygame.time
 from pygame.locals import *
 from arrow import *
 from constants import *
@@ -82,7 +81,6 @@ while running:
         arrowY = baseY
         arrowMoving = False
 
-
     window.blit(background, (0, 20))
     window.blit(character, (75, baseGround))
     window.blit(target, (targetX, targetY))
@@ -100,7 +98,6 @@ while running:
 
     if not arrowMoving:
         showArrow(window, arrowX, arrowY, arrowAngle)
-
 
     pygame.display.update()
     clock.tick(60)
