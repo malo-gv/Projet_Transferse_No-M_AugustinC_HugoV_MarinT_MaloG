@@ -1,8 +1,9 @@
+import pygame.time
 from pygame.locals import *
 from arrow import *
 from constants import *
 from target import *
-
+import time
 currentTime = pygame.time.get_ticks() / 1000
 print(currentTime)
 pygame.init()
@@ -61,7 +62,7 @@ while running:
 
         arrowTilt = calculateArrowAngle(arrowX, arrowY, previousArrowX, previousArrowY)
 
-        if collisionCible(arrowX,arrowY,arrowAngle, targetX, targetY, target):
+        if collisionCible(arrowX,arrowY, targetX, targetY):
             pygame.time.wait(750)
             arrowMoving = False
             colisionActive = True
@@ -75,18 +76,40 @@ while running:
         arrowX = baseX
         arrowY = baseY
         targetX, targetY = bougerCible()
+        arMissed = 0
+
+    if arrowY > 570:
+        pygame.time.wait(750)
+        arrowX = baseX
+        arrowY = baseY
+        arrowMoving = False
+        arMissed = arMissed + 1
 
     if (arrowX > 1080 or arrowY > 720):
         arrowX = baseX
         arrowY = baseY
         arrowMoving = False
+        arMissed = arMissed + 1
+
+    if arMissed >= 5 :
+        finished = True
+
 
     window.blit(background, (0, 20))
     window.blit(character, (75, baseGround))
     window.blit(target, (targetX, targetY))
     font = pygame.font.SysFont("comicsans", 30, True)
-    text = font.render("Cibles touchées : " + str(score), 1, (255, 255, 255))  # Arguments are: text, anti-aliasing, color
-    window.blit(text, (55, 40))
+    textScore = font.render("Cibles touchées : " + str(score), 1, (255, 255, 255))
+    textMiss = font.render("Tirs ratés : " + str(arMissed), 1, (255, 255, 255))
+    textGameOver = font.render("5 tirs ratés GAME OVER", 1, (200, 30, 30))
+    window.blit(textScore, (55, 30))
+    window.blit(textMiss, (55, 70))
+    window.blit(textGameOver, (680, 20))
+
+    if finished:
+        gameOver = pygame.image.load("sprites character/game-over.png")
+        gameOver = pygame.transform.scale(gameOver, (int(gameOver.get_width() * 0.65), int(gameOver.get_height() * 0.65)))
+        window.blit(gameOver, (380, 200))
 
     if not arrowMoving and shootStartTime:
         currentShootDuration = (pygame.time.get_ticks() - shootStartTime) / 1000.0
@@ -102,5 +125,7 @@ while running:
 
     pygame.display.update()
     clock.tick(60)
-
+    if finished:
+        pygame.time.wait(2000)
+        pygame.quit()
 pygame.quit()

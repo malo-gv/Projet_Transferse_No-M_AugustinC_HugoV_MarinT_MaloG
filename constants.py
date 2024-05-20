@@ -8,6 +8,8 @@ arrowTilt = 0
 initialArrowX = arrowX
 initialArrowY = arrowY
 score = 0
+arMissed = 0
+finished = False
 
 #Constantes écran
 WIDTH = 1080
