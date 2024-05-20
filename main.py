@@ -101,7 +101,7 @@ while running:
     font = pygame.font.SysFont("comicsans", 30, True)
     textScore = font.render("Cibles touchées : " + str(score), 1, (255, 255, 255))
     textMiss = font.render("Tirs ratés : " + str(arMissed), 1, (255, 255, 255))
-    textGameOver = font.render("5 tirs ratés GAME OVER", 1, (200, 30, 30))
+    textGameOver = font.render("5 tirs ratés = GAME OVER", 1, (200, 30, 30))
     window.blit(textScore, (55, 30))
     window.blit(textMiss, (55, 70))
     window.blit(textGameOver, (680, 20))
