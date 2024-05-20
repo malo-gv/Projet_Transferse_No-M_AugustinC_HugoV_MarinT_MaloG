@@ -35,9 +35,19 @@ def collisionCible(arrowX, arrowY, arrowAngle, targetX, targetY, target):
     else:
         return False
 
-def drawTrajectory(window, arrowX, arrowY, shootForce, arrowAngle, steps=50):
+def drawTrajectory(window, arrowX, arrowY, shootForce, arrowAngle, steps=15):
     for step in range(steps):
         t = step / 10.0  # Échelonner le temps pour obtenir des points plus rapprochés
-        arrowX = arrowX + (shootForce * math.cos(math.radians(arrowAngle)) * t)
-        arrowY = arrowY + 0.5 * gravity * (t ** 2) - ((shootForce * math.sin(math.radians(arrowAngle))) * t)
+        arrowX  = arrowX + (shootForce * math.cos(math.radians(arrowAngle)) * t)
+        arrowY  = arrowY + 0.5 * gravity * (t ** 2) - ((shootForce * math.sin(math.radians(arrowAngle))) * t)
         pygame.draw.circle(window, (0, 0, 0), (int(arrowX), int(arrowY)), 2)
+
+def drawPowerGauge(window, shootDuration, maxForce):
+    gauge_width = 200
+    gauge_height = 20
+    gauge_x = 20
+    gauge_y = LENGTH - 40
+    fill_width = min(gauge_width, int((shootDuration / (maxForce / 10)) * gauge_width))
+
+    pygame.draw.rect(window, (255, 255, 255), (gauge_x, gauge_y, gauge_width, gauge_height), 2)
+    pygame.draw.rect(window, (0, 255, 0), (gauge_x, gauge_y, fill_width, gauge_height))

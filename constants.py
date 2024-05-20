@@ -19,7 +19,7 @@ targetY = 450
 
 
 #Constantes natrelles
-gravity = 9.8
+gravity = 17
 
 arrowVisible = False
 arrowRotateDown = False
@@ -27,4 +27,6 @@ arrowRotateUp = False
 colisionActive = False
 arrowMoving = False
 shootForce = 0
-maxForce = 20
+shootStartTime = None
+maxForce = 15
+maxForceDraw = maxForce + 12.5

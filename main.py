@@ -79,9 +79,10 @@ while running:
     window.blit(character, (75, baseGround))
     window.blit(target, (targetX, targetY))
 
-
-    if (not arrowMoving) and colisionActive == False:
-        drawTrajectory(window, initialArrowX, initialArrowY, shootForce, arrowAngle)
+    if not arrowMoving and shootStartTime:
+        currentShootDuration = (pygame.time.get_ticks() - shootStartTime) / 1000.0
+        drawPowerGauge(window, currentShootDuration, maxForceDraw)
+        drawTrajectory(window, initialArrowX, initialArrowY, min(maxForceDraw, currentShootDuration * 10), arrowAngle)
 
     showArrow(window, arrowX, arrowY, arrowAngle)
     pygame.display.update()
