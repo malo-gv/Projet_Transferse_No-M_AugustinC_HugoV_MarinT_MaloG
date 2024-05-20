@@ -99,6 +99,7 @@ while running:
     if not arrowMoving:
         showArrow(window, arrowX, arrowY, arrowAngle)
 
+
     pygame.display.update()
     clock.tick(60)
 
