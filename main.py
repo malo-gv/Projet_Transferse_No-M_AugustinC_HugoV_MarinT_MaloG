@@ -104,7 +104,7 @@ while running:
     textGameOver = font.render("5 tirs ratés = GAME OVER", 1, (200, 30, 30))
     window.blit(textScore, (55, 30))
     window.blit(textMiss, (55, 70))
-    window.blit(textGameOver, (680, 20))
+    window.blit(textGameOver, (660, 20))
 
     if finished:
         gameOver = pygame.image.load("sprites character/game-over.png")
