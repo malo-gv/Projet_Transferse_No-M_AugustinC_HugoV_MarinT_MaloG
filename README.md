@@ -1,3 +1,5 @@
+https://github.com/malo-gv/Projet_Transferse_NoeM_AugustinC_HugoV_MarinT_MaloG
+
 # Jeu Bow Battle
 
 ## Description
@@ -35,11 +37,6 @@ Ce projet est un jeu de tir à l'arc développé en Python en utilisant la bibli
     - `constants.py`
     - `target.py`
       
-    - Les images nécessaires (dans les dossiers appropriés) :
-        - `Images background/background v1.jpg`
-        - `sprites character/archer.png`
-        - `sprites character/arrow.png`
-        - `sprites character/bullseye.png`
 
 
 2. Lancez le fichier main et profitez de cette expérience de tir en 2D !
