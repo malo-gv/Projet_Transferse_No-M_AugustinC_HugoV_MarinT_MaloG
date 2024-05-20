@@ -39,7 +39,7 @@ while running:
             if event.key == K_SPACE:
                 shootStartTime = pygame.time.get_ticks()
         if event.type == KEYUP:
-            if event.key == K_SPACE and arrowMoving == False:
+            if event.key == K_SPACE and arrowMoving is False:
                 shootEndTime = pygame.time.get_ticks()
                 shootDuration = (shootEndTime - shootStartTime) / 1000.0
                 shootForce = min(maxForce, shootDuration * 10)
@@ -47,21 +47,27 @@ while running:
                 initialArrowY = arrowY
                 arrowMoving = True
                 startTime = pygame.time.get_ticks() / 1000
+                shootStartTime = None
 
+    if not arrowMoving and not colisionActive:
+        mouseX, mouseY = pygame.mouse.get_pos()
+        arrowAngle = calculateArrowAngle(mouseX, mouseY, arrowX, arrowY)
 
     if arrowMoving:
+        previousArrowX, previousArrowY = arrowX, arrowY
         currentTime = pygame.time.get_ticks() / 1000
         timerShoot = currentTime - startTime
         print(timerShoot)
         arrowX, arrowY = moveArrow(arrowX, arrowY, shootForce, arrowAngle, timerShoot)
 
+        arrowTilt = calculateArrowAngle(arrowX, arrowY, previousArrowX, previousArrowY)
+
         if collisionCible(arrowX,arrowY,arrowAngle, targetX,targetY, target):
             pygame.time.wait(750)
             arrowMoving = False
             colisionActive = True
-            waitingTimer = 0
 
-    if (arrowMoving == False and colisionActive ):
+    if arrowMoving is False and colisionActive:
         pygame.time.wait(2000)
         print("NEXT")
         colisionActive = False
@@ -84,7 +90,7 @@ while running:
         drawPowerGauge(window, currentShootDuration, maxForceDraw)
         drawTrajectory(window, initialArrowX, initialArrowY, min(maxForceDraw, currentShootDuration * 10), arrowAngle)
 
-    showArrow(window, arrowX, arrowY, arrowAngle)
+    showArrow(window, arrowX, arrowY, arrowTilt)
     pygame.display.update()
     clock.tick(60)
 
