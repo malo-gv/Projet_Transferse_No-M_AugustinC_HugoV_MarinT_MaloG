@@ -1,9 +1,8 @@
-import pygame.time
 from pygame.locals import *
 from arrow import *
 from constants import *
 from target import *
-import time
+
 currentTime = pygame.time.get_ticks() / 1000
 print(currentTime)
 pygame.init()
@@ -73,8 +72,6 @@ while running:
     if arrowMoving is False and colisionActive:
         pygame.time.wait(2000)
         score = score + 1
-        print(score)
-        print("NEXT")
         colisionActive = False
         arrowX = baseX
         arrowY = baseY
@@ -88,7 +85,7 @@ while running:
         arrowMoving = False
         arMissed = arMissed + 1
 
-    if (arrowX > 1080 or arrowY > 720):
+    if (arrowX > WIDTH or arrowY > LENGTH):
         arrowX = baseX
         arrowY = baseY
         arrowMoving = False
@@ -102,7 +99,7 @@ while running:
     window.blit(character, (75, baseGround))
     window.blit(target, (targetX, targetY))
     font = pygame.font.SysFont("comicsans", 30, True)
-    textScore = font.render("Cibles touchées : " + str(score), 1, (255, 255, 255))
+    textScore = font.render("Dans le mille ! : " + str(score), 1, (255, 255, 255))
     textMiss = font.render("Tirs ratés : " + str(arMissed), 1, (255, 255, 255))
     textGameOver = font.render("5 tirs ratés = GAME OVER", 1, (200, 30, 30))
     window.blit(textScore, (55, 30))

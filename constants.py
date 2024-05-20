@@ -7,10 +7,19 @@ arrowAngle = 0
 arrowTilt = 0
 initialArrowX = arrowX
 initialArrowY = arrowY
+arrowVisible = False
+arrowRotateDown = False
+arrowRotateUp = False
+arrowMoving = False
+
+#Constantes jeu
 score = 0
 arMissed = 0
 finished = False
-
+shootForce = 0
+shootStartTime = None
+maxForce = 15
+maxForceDraw = maxForce + 12.5
 
 #Constantes écran
 WIDTH = 1080
@@ -20,17 +29,11 @@ baseGround = 440
 #Constantes cible
 targetX = 850
 targetY = 450
+colisionActive = False
 
-
-#Constantes natrelles
+#Constantes naturelles
 gravity = 17
 
-arrowVisible = False
-arrowRotateDown = False
-arrowRotateUp = False
-colisionActive = False
-arrowMoving = False
-shootForce = 0
-shootStartTime = None
-maxForce = 15
-maxForceDraw = maxForce + 12.5
+
+
+
