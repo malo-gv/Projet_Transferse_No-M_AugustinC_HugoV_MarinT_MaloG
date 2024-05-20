@@ -27,8 +27,8 @@ def collisionCible(arrowX, arrowY, arrowAngle, targetX, targetY, target):
     arrowImage = pygame.transform.scale(arrowImage, (int(arrowImage.get_width() * 0.1), int(arrowImage.get_height() * 0.1)))
     arrowImage = pygame.transform.rotate(arrowImage, arrowAngle)
     arrowRectange = arrowImage.get_rect(center = (arrowX, arrowY))
-    target = pygame.transform.scale(target , (int(target.get_width() * 0.7), int(target.get_height() * 0.7)))
-    colisionZone = target.get_rect(topleft=(targetX + 20, targetY + 20))
+    target = pygame.transform.scale(target , (int(target.get_width() * 0.6), int(target.get_height() * 0.6)))
+    colisionZone = target.get_rect(topleft=(targetX + 15, targetY + 15))
     if arrowRectange.colliderect(colisionZone):
         print("COLLISION")
         return True

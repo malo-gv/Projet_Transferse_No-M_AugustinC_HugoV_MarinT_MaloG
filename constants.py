@@ -10,7 +10,7 @@ initialArrowY = arrowY
 
 #Constantes écran
 WIDTH = 1080
-LENGTH = 725
+LENGTH = 682
 baseGround = 440
 
 #Constantes cible
