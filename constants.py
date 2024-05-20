@@ -11,6 +11,7 @@ score = 0
 arMissed = 0
 finished = False
 
+
 #Constantes écran
 WIDTH = 1080
 LENGTH = 682

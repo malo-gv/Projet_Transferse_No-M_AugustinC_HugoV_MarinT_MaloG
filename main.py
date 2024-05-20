@@ -27,8 +27,9 @@ keys = pygame.key.get_pressed()
 
 running = True
 arrowMoving = False
-
+JAD = False
 while running:
+
     for event in pygame.event.get():
         if event.type == QUIT:
             running = False
@@ -39,6 +40,8 @@ while running:
             if event.key == K_SPACE:
                 shootStartTime = pygame.time.get_ticks()
         if event.type == KEYUP:
+            if event.key == K_j:
+                JAD = True
             if event.key == K_SPACE and arrowMoving is False:
                 shootEndTime = pygame.time.get_ticks()
                 shootDuration = (shootEndTime - shootStartTime) / 1000.0
@@ -106,6 +109,12 @@ while running:
     window.blit(textMiss, (55, 70))
     window.blit(textGameOver, (660, 20))
 
+    if JAD == True :
+        imageJAD = pygame.image.load("sprites character/jad.png")
+        imageJAD = pygame.transform.scale(imageJAD,(int(character.get_width() * 0.4), int(character.get_height() * 0.4)))
+        imageJAD = pygame.transform.flip(imageJAD, True, False)
+        window.blit(imageJAD, (116, 448))
+
     if finished:
         gameOver = pygame.image.load("sprites character/game-over.png")
         gameOver = pygame.transform.scale(gameOver, (int(gameOver.get_width() * 0.65), int(gameOver.get_height() * 0.65)))
@@ -122,9 +131,9 @@ while running:
     if not arrowMoving:
         showArrow(window, arrowX, arrowY, arrowAngle)
 
-
     pygame.display.update()
     clock.tick(60)
+
     if finished:
         pygame.time.wait(2000)
         pygame.quit()
